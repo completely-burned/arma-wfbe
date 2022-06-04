@@ -96,6 +96,10 @@ if ((missionNamespace getVariable "WFBE_C_TOWNS_PATROLS") > 0) then {
 	
 [] Call Compile preprocessFile 'Server\Init\Init_Defenses.sqf';
 
+//--- Server fps.
+[] ExecVM "Server\Server_ai_delegation_fps.sqf";
+["INITIALIZATION", "Init_Server.sqf: Server_ai_delegation_fps is loaded."] Call WFBE_CO_FNC_LogContent;
+
 //--- Fast Time.
 if ((missionNamespace getVariable "WFBE_C_ENVIRONMENT_FAST_TIME") > 0) then {
 	[] ExecFSM "Server\FSM\env_fast_time.fsm";
