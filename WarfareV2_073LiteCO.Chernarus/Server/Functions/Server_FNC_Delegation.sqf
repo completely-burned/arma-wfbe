@@ -136,8 +136,10 @@ WFBE_SE_FNC_GetDelegators = {
 	_count = _this;
 
 	//-- dynamic
-	// TODO: _sv_fps = diag_fps временное решение, среднее значение fps нужно сделать должным образом.
-	_sv_fps = diag_fps;
+	_sv_fps = missionNamespace getVariable "WFBE_AI_DELEGATION_SERVER";
+	if (isNil "_sv_fps") then {
+		_sv_fps = diag_fps;
+	};
 	//_sv_fps = [missionNamespace getVariable "WFBE_C_AI_DELEGATION_FPS_INTERVAL"] call gosa_fps_getAVG;
 	_cl_limit_grpoups = missionNamespace getVariable "WFBE_C_AI_DELEGATION_GROUPS_MAX";
 	_cl_limit_fps = missionNamespace getVariable "WFBE_C_AI_DELEGATION_FPS_MIN";
