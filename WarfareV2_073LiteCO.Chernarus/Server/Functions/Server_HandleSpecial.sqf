@@ -73,10 +73,17 @@ switch (_args select 0) do {
 		_fps = _args select 2;
 		
 		_get = missionNamespace getVariable format["WFBE_AI_DELEGATION_%1", _uid];
-		if !(isNil "_get") then {
+		if (isNil "_get") then {
+			// FIXME: OnPlayerConnected не срабатывает, по неизвестной причине.
+			// TODO: Это временное решение, нужно сделать должным образом, select 1 и 2.
+			_get = [_fps,0,-10];
+		}else{
 			_get set [0, _fps];
-			missionNamespace setVariable [format["WFBE_AI_DELEGATION_%1", _uid], _get];
 		};
+		if (count _args > 3) then {
+			_get set [3, _args select 3];
+		};
+		missionNamespace setVariable [format["WFBE_AI_DELEGATION_%1", _uid], _get];
 	};
 	case "update-delegation": {
 		Private ["_town","_vehicles"];
