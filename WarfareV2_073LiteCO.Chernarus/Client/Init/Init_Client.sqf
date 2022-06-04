@@ -137,7 +137,9 @@ if ((missionNamespace getVariable "WFBE_C_ENVIRONMENT_WEATHER_VOLUMETRIC") > 0) 
 //--- Global Client Variables.
 sideID = sideJoined Call GetSideID;
 clientTeam = group player;
+if (hasInterface) then {
 clientTeams = missionNamespace getVariable Format['WFBE_%1TEAMS',sideJoinedText];
+};
 playerType = typeOf player;
 playerDead = false;
 paramBoundariesRunning = false;
@@ -146,8 +148,10 @@ WFBE_Client_Logic = (WFBE_Client_SideJoined) Call WFBE_CO_FNC_GetSideLogic;
 WFBE_Client_SideID = sideID;
 WFBE_Client_Color = switch (WFBE_Client_SideJoined) do { case west: {missionNamespace getVariable "WFBE_C_WEST_COLOR"}; case east: {missionNamespace getVariable "WFBE_C_EAST_COLOR"}; case resistance: {missionNamespace getVariable "WFBE_C_GUER_COLOR"}};
 WFBE_Client_Team = clientTeam;
+if (hasInterface) then {
 WFBE_Client_Teams = clientTeams;
 WFBE_Client_Teams_Count = count WFBE_Client_Teams;
+};
 WFBE_Client_IsRespawning = false;
 WFBE_Client_LastGroupJoinRequest = -5000;
 WFBE_Client_PendingRequests = [];
@@ -187,6 +191,11 @@ antiAirRadarInRange = false;
 hangarInRange = false;
 
 enableTeamSwitch false;
+
+//--- AI delegation, Headless Client.
+if (!hasInterface) exitWith {
+	["INITIALIZATION", Format ["Init_Client.sqf: Headless Client is complete at [%1]", time]] Call WFBE_CO_FNC_LogContent;
+};
 
 //--- Import the client side upgrade informations.
 ExecVM "Common\Config\Core_Upgrades\Labels_Upgrades.sqf";
