@@ -113,7 +113,7 @@ WFBE_SE_FNC_MortarSupport = {
 		} forEach _mortars;
 		
 		if (time - _mortar_lastfired > _interval && _process) then { //--- Ready to fire, acquire a new target.
-			_target = [_town, _side] Call WFBE_SE_FNC_MortarGetShellPosition; //--- Attempt to acquire a target for the mortars.
+			_target = ([_town, _side] Call WFBE_SE_FNC_MortarGetShellPosition); //--- Attempt to acquire a target for the mortars.
 			if (count _target > 0) then {
 				_mortar_lastfired = time;
 				{if (alive _x) then {if (alive gunner _x && !someAmmo _x) then {if (local gunner _x) then {[_x, _side] Call RearmVehicle}}}} forEach _mortars; //--- Rearm the mortars before firing if needed.
