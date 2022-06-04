@@ -64,7 +64,7 @@ if (isNil {missionNamespace getVariable "WFBE_C_AI_MAX"}) then {missionNamespace
 if (isNil {missionNamespace getVariable "WFBE_C_AI_DELEGATION"}) then {missionNamespace setVariable ["WFBE_C_AI_DELEGATION", 0]}; //--- Enable AI delegation (creation of ai on the client).
 missionNamespace setVariable ["WFBE_C_AI_DELEGATION_FPS_INTERVAL", 60*3]; //--- A client send it's FPS average each x seconds to the server.
 missionNamespace setVariable ["WFBE_C_AI_DELEGATION_FPS_MIN", 25]; //--- A client can handle groups if it's FPS average is above x.
-missionNamespace setVariable ["WFBE_C_AI_DELEGATION_GROUPS_MAX", 1]; //--- A client max have up to x groups managed on his computer (high values may makes lag, be careful).
+missionNamespace setVariable ["WFBE_C_AI_DELEGATION_GROUPS_MAX", 15]; //--- A client max have up to x groups managed on his computer (high values may makes lag, be careful).
 missionNamespace setVariable ["WFBE_C_AI_PATROL_RANGE", 400];
 if (isNil {missionNamespace getVariable "WFBE_C_AI_TEAMS_ENABLED"}) then {missionNamespace setVariable ["WFBE_C_AI_TEAMS_ENABLED", 1]}; //--- Enable or disable the AI Teams.
 if (isNil {missionNamespace getVariable "WFBE_C_AI_TEAMS_JIP_PRESERVE"}) then {missionNamespace setVariable ["WFBE_C_AI_TEAMS_JIP_PRESERVE", 0]}; //--- Keep the AI Teams units on JIP.
