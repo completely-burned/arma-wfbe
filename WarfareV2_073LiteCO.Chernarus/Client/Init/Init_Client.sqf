@@ -194,7 +194,7 @@ enableTeamSwitch false;
 
 //--- AI delegation, Headless Client.
 if (!hasInterface) exitWith {
-	[] execVM "Client\Client_ai_delegation_fps.sqf"
+	[] execVM "Client\Client_ai_delegation_fps.sqf";
 	["INITIALIZATION", Format ["Init_Client.sqf: Headless Client is complete at [%1]", time]] Call WFBE_CO_FNC_LogContent;
 };
 
@@ -219,7 +219,7 @@ if ((missionNamespace getVariable "WFBE_C_ECONOMY_INCOME_SYSTEM") in [3,4]) then
 if ((missionNamespace getVariable "WFBE_C_UNITS_TRACK_LEADERS") > 0) then {[] ExecFSM "Client\FSM\updateteamsmarkers.fsm"};
 [] ExecFSM "Client\FSM\updateactions.fsm";
 /* Don't pause the client initialization process. */
-[] Spawn {	
+[] Spawn {
 	waitUntil {townInit};
 	/* Handle the capture GUI */
 	["INITIALIZATION", "Init_Client.sqf: Initializing the Town Capture FSM"] Call WFBE_CO_FNC_LogContent;
@@ -260,7 +260,7 @@ WFBE_V_HQTopicSide = WFBE_Client_Logic getVariable "wfbe_radio_hq_id";
 ["INITIALIZATION", Format["Init_Client.sqf: Initializing the Radio Announcer Identity [%1]", WFBE_V_HQTopicSide]] Call WFBE_CO_FNC_LogContent;
 _HQRadio setIdentity WFBE_V_HQTopicSide;
 _HQRadio setRank "COLONEL";
-_HQRadio setGroupId ["HQ"]; 
+_HQRadio setGroupId ["HQ"];
 _HQRadio kbAddTopic [WFBE_V_HQTopicSide,"Client\kb\hq.bikb","Client\kb\hq.fsm",{call compile preprocessFileLineNumbers "Client\kb\hq.sqf"}];
 player kbAddTopic [WFBE_V_HQTopicSide,"Client\kb\hq.bikb","Client\kb\hq.fsm",{call compile preprocessFileLineNumbers "Client\kb\hq.sqf"}];
 sideHQ = _HQRadio;
@@ -275,13 +275,13 @@ if (isMultiplayer && (missionNamespace getVariable "WFBE_C_GAMEPLAY_TEAMSWAP_DIS
 	sleep (random 0.1);
 
 	["RequestJoin", [player, sideJoined]] Call WFBE_CO_FNC_SendToServer;
-	
+
 	_timelaps = 0;
 	while {true} do {
 		sleep 0.1;
 		_get = missionNamespace getVariable 'WFBE_P_CANJOIN';
 		if !(isNil '_get') exitWith {["INITIALIZATION", Format["Init_Client.sqf: [%1] Client [%2], Can join? [%3]",sideJoined,name player,_get]] Call WFBE_CO_FNC_LogContent};
-		
+
 		_timelaps = _timelaps + 0.1;
 		if (_timelaps > 5) then {
 			_timelaps = 0;
@@ -289,7 +289,7 @@ if (isMultiplayer && (missionNamespace getVariable "WFBE_C_GAMEPLAY_TEAMSWAP_DIS
 			["RequestJoin", [player, sideJoined]] Call WFBE_CO_FNC_SendToServer;
 		};
 	};
-	
+
 	if !(_get) exitWith {
 		["WARNING", Format["Init_Client.sqf: [%1] Client [%2] has teamswapped and is now being sent back to the lobby.",sideJoined,name player]] Call WFBE_CO_FNC_LogContent;
 		(localize 'STR_WF_CHAT_Teamswap_Warnning') Call CommandChatMessage;
@@ -309,7 +309,7 @@ if (time < 30) then {
 	waitUntil {!isNil {WFBE_Client_Logic getVariable "wfbe_structures"}};
 	_base = (sideJoined) Call WFBE_CO_FNC_GetSideHQ;
 	_buildings = (sideJoined) Call WFBE_CO_FNC_GetSideStructures;
-	
+
 	if (count _buildings > 0) then {_base = _buildings select 0};
 };
 
@@ -405,7 +405,7 @@ switch (missionNamespace getVariable "WFBE_C_STRUCTURES_COLLIDING") do {
 			_itemcategory = _this select 0;
 			_preview = _this select 1;
 			_color = _this select 2;
-			
+
 			if (surfaceIsWater(position _preview)) then {
 				_color = _colorRed;
 			} else {
@@ -417,7 +417,7 @@ switch (missionNamespace getVariable "WFBE_C_STRUCTURES_COLLIDING") do {
 					};
 				};
 			};
-			
+
 			_color
 		}];
 	};
@@ -427,8 +427,8 @@ switch (missionNamespace getVariable "WFBE_C_STRUCTURES_COLLIDING") do {
 			_itemcategory = _this select 0;
 			_preview = _this select 1;
 			_color = _this select 2;
-			
-			if !(typeOf _preview in ["Concrete_Wall_EP1"]) then {		
+
+			if !(typeOf _preview in ["Concrete_Wall_EP1"]) then {
 				_isFlat = (position _preview) isFlatEmpty [
 					(sizeof typeof _preview) / (missionNamespace getVariable "WFBE_C_BASE_COIN_DISTANCE_MIN"), 	//--- Minimal distance from another object
 					0, 										//--- If 0, just check position. If >0, select new one
@@ -438,7 +438,7 @@ switch (missionNamespace getVariable "WFBE_C_STRUCTURES_COLLIDING") do {
 					false, 									//--- True if some water can be in 25m radius
 					_preview 								//--- Ignored object
 				];
-				
+
 				//--- Unable to Place due to the land.
 				if (count _isFlat == 0 || count (((position _preview) nearEntities 10) - [_preview]) > 0) then {_color = _colorRed};
 			};
