@@ -54,6 +54,10 @@ WFBE_UP_SUPPLYPARADROP = 16;
 WFBE_UP_ARTYAMMO = 17;
 WFBE_UP_IRSMOKE = 18;
 
+gosa_load_balancing_sv = 100;
+gosa_load_balancing_hc = 150;
+gosa_load_balancing_cl = 75;
+
 //--- New Variables, use isNil to check whether it's already defined or not (MP parameters).
 
 //--- AI.
