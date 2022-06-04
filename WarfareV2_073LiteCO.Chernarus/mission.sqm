@@ -33,7 +33,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=119;
+		items=121;
 		class Item0
 		{
 			side="LOGIC";
@@ -5200,10 +5200,158 @@ class Mission
 				};
 			};
 		};
+		class Item119
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=10;
+				class Item0
+				{
+					position[]={13754.831,20.483839,3054.7898};
+					id=359;
+					side="CIV";
+					vehicle="Profiteer4";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					leader=1;
+					skill=0.2;
+					text="headlessClient";
+					synchronizations[]={369};
+				};
+				class Item1
+				{
+					position[]={13757.831,21.881147,3049.7898};
+					id=360;
+					side="CIV";
+					vehicle="Worker2";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					skill=0.2;
+					text="headlessClient (2)";
+					synchronizations[]={369};
+				};
+				class Item2
+				{
+					position[]={13759.831,21.102314,3049.7898};
+					id=361;
+					side="CIV";
+					vehicle="Functionary1";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					skill=0.2;
+					text="headlessClient (3)";
+					synchronizations[]={369};
+				};
+				class Item3
+				{
+					position[]={13761.831,20.323837,3049.7898};
+					id=362;
+					side="CIV";
+					vehicle="Woodlander4";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					skill=0.2;
+					text="headlessClient (4)";
+					synchronizations[]={369};
+				};
+				class Item4
+				{
+					position[]={13763.831,19.601841,3049.7898};
+					id=363;
+					side="CIV";
+					vehicle="Rocker1";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					skill=0.2;
+					text="headlessClient (5)";
+					synchronizations[]={369};
+				};
+				class Item5
+				{
+					position[]={13765.831,18.896244,3049.7898};
+					id=364;
+					side="CIV";
+					vehicle="Worker3";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					skill=0.2;
+					text="headlessClient (6)";
+					synchronizations[]={369};
+				};
+				class Item6
+				{
+					position[]={13767.831,18.162754,3049.7898};
+					id=365;
+					side="CIV";
+					vehicle="Profiteer3";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					skill=0.2;
+					text="headlessClient (7)";
+					synchronizations[]={369};
+				};
+				class Item7
+				{
+					position[]={13771.266,16.931637,3049.8438};
+					id=366;
+					side="CIV";
+					vehicle="Profiteer2";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					skill=0.2;
+					text="headlessClient (8)";
+					synchronizations[]={369};
+				};
+				class Item8
+				{
+					position[]={13772.915,16.415674,3049.8171};
+					id=367;
+					side="CIV";
+					vehicle="Worker4";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					skill=0.2;
+					text="headlessClient (9)";
+					synchronizations[]={369};
+				};
+				class Item9
+				{
+					position[]={13769.831,17.4296,3049.7898};
+					id=368;
+					side="CIV";
+					vehicle="Profiteer1";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					skill=0.2;
+					text="headlessClient (10)";
+					synchronizations[]={369};
+				};
+			};
+		};
+		class Item120
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={13764.278,13.570059,3061.2251};
+					id=369;
+					side="LOGIC";
+					vehicle="LocationLogicOwnerCivilian";
+					leader=1;
+					skill=0.60000002;
+					text="sideNull";
+					synchronizations[]={367,366,368,365,364,363,362,361,360,359};
+				};
+			};
+		};
 	};
 	class Markers
 	{
-		items=3;
+		items=4;
 		class Item0
 		{
 			position[]={14155.423,17.164606,2797.7344};
@@ -5220,6 +5368,12 @@ class Mission
 		{
 			position[]={13818.272,27.086155,3012.8872};
 			name="GuerTempRespawnMarker";
+			type="Empty";
+		};
+		class Item3
+		{
+			position[]={13740.863,34.818417,3029.5674};
+			name="CivilianTempRespawnMarker";
 			type="Empty";
 		};
 	};
