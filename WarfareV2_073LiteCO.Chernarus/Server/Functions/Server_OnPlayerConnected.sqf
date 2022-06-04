@@ -18,6 +18,12 @@ waitUntil {commonInitComplete && serverInitFull};
 //--- Skip this script if the server is trying to run this.
 if (_name == '__SERVER__' || _uid == '' || local player) exitWith {};
 
+//--- If AI delegation is enabled, we create a special variable for player based on his UID and ID.  FPS | Groups handled | Session ID.
+if ((missionNamespace getVariable "WFBE_C_AI_DELEGATION") > 0) then {
+	// FIXME: Этот код не работает по неизвестной причине.
+	missionNamespace setVariable [format["WFBE_AI_DELEGATION_%1", _uid], [0,0,_id]];
+};
+
 //--- We try to get the player and it's group from the playableUnits.
 _max = 10;
 _team = grpNull;
@@ -63,11 +69,6 @@ _team Call WFBE_CO_FNC_WaypointsRemove;
 //--- We store the player UID over the group, this allows us to easily fetch the disconnecting client original group.
 _team setVariable ["wfbe_uid", _uid];
 _team setVariable ["wfbe_teamleader", leader _team];
-
-//--- If AI delegation is enabled, we create a special variable for player based on his UID and ID.  FPS | Groups handled | Session ID.
-if ((missionNamespace getVariable "WFBE_C_AI_DELEGATION") > 0) then {
-	missionNamespace setVariable [format["WFBE_AI_DELEGATION_%1", _uid], [0,0,_id]];
-};
 
 //--- The player has joined for the first time.
 if (isNil '_get') exitWith {
