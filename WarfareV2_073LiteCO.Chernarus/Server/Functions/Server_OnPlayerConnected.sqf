@@ -11,6 +11,7 @@ _name = _this select 1;
 _id = _this select 2;
 
 //--- Wait for a proper common & server initialization before going any further.
+waitUntil {!isNil "commonInitComplete" && !isNil "serverInitFull"};
 waitUntil {commonInitComplete && serverInitFull};
 
 ["INFORMATION", Format ["Server_PlayerConnected.sqf: Player [%1] [%2] has joined the game", _name, _uid]] Call WFBE_CO_FNC_LogContent;
