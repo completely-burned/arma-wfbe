@@ -15,7 +15,7 @@
 //#define ARROWHEAD 1
 
 /* Description.ext Specific */
-#define WF_MAXPLAYERS 32
+#define WF_MAXPLAYERS 8
 #define WF_MISSIONNAME "Warfare Benny Edition V2.073 Lite CO - Chernarus"
 #define WF_RESPAWNDELAY 2
 
