@@ -12,6 +12,7 @@
 
 Private ['_towns','_value'];
 
+waitUntil {!isNil "WFBE_Parameters_Ready"};
 waitUntil {WFBE_Parameters_Ready};
 
 TownTemplate = [];

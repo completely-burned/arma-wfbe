@@ -8,6 +8,7 @@ _townMaxSV = _this select 4;
 _townValue = _this select 5;
 _townRange = if (count _this > 6) then {_this select 6} else {550};
 
+waitUntil {!isNil "townModeSet" && !isNil "WFBE_Parameters_Ready"};
 waitUntil {townModeSet && WFBE_Parameters_Ready};
 
 //--- Prevent the isServer bug on the client.
