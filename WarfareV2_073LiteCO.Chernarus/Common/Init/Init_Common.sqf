@@ -128,6 +128,7 @@ WFBE_CO_FNC_WaypointsAdd = Compile preprocessFileLineNumbers "Common\Functions\C
 WFBE_CO_FNC_WaypointsRemove = Compile preprocessFileLineNumbers "Common\Functions\Common_WaypointsRemove.sqf";
 
 gosa_FNC_GetFPS = Compile preprocessFileLineNumbers "Common\Functions\Common_GetFPS.sqf";
+gosa_FNC_AddFPS = Compile preprocessFileLineNumbers "Common\Functions\Common_AddFPS.sqf";
 
 ["INITIALIZATION", "Init_Common.sqf: Functions are initialized."] Call WFBE_CO_FNC_LogContent;
 
