@@ -194,7 +194,6 @@ enableTeamSwitch false;
 
 //--- AI delegation, Headless Client.
 if (!hasInterface) exitWith {
-	[] execVM "Client\Client_ai_delegation_fps.sqf";
 	["INITIALIZATION", Format ["Init_Client.sqf: Headless Client is complete at [%1]", time]] Call WFBE_CO_FNC_LogContent;
 };
 

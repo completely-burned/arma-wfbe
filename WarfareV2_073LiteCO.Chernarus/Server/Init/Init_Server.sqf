@@ -93,12 +93,8 @@ if ((missionNamespace getVariable "WFBE_C_TOWNS_PATROLS") > 0) then {
 	missionNamespace setVariable ["WFBE_C_PATROLS_TOWNS_REUSABLITY", 0.25];//--- Patrols may patrol a town again after being in 25% of the other towns.
 	missionNamespace setVariable ["WFBE_C_PATROLS_TOWNS_LOCK", floor(totalTowns * (missionNamespace getVariable "WFBE_C_PATROLS_TOWNS_REUSABLITY"))];
 };
-	
-[] Call Compile preprocessFile 'Server\Init\Init_Defenses.sqf';
 
-//--- Server fps.
-[] ExecVM "Server\Server_ai_delegation_fps.sqf";
-["INITIALIZATION", "Init_Server.sqf: Server_ai_delegation_fps is loaded."] Call WFBE_CO_FNC_LogContent;
+[] Call Compile preprocessFile 'Server\Init\Init_Defenses.sqf';
 
 //--- Fast Time.
 if ((missionNamespace getVariable "WFBE_C_ENVIRONMENT_FAST_TIME") > 0) then {
@@ -214,21 +210,21 @@ if (_use_random) then {
 			_rPosW = _locationLogics select floor(random _total);
 			if (_rPosW distance _startE > _minDist && _rPosW distance _startG > _minDist) then {_startW = _rPosW; _setWest = false};
 		};
-		
+
 		// --- Determine west starting location if necessary.
 		if (_setEast) then {
 			_rPosE = _locationLogics select floor(random _total);
 			if (_rPosE distance _startW > _minDist && _rPosE distance _startG > _minDist) then {_startE = _rPosE; _setEast = false};
 		};
-		
+
 		// --- Determine guer starting location if necessary.
 		if (_setGuer) then {
 			_rPosG = _locationLogics select floor(random _total);
 			if (_rPosG distance _startW > _minDist && _rPosG distance _startE > _minDist) then {_startG = _rPosG; _setGuer = false};
 		};
-		
+
 		_i = _i + 1;
-		
+
 		if (_i >= _maxAttempts) exitWith {
 			//--- Get the default locations.
 			Private ["_eastDefault", "_guerDefault", "_westDefault"];
@@ -255,11 +251,11 @@ if (_use_random) then {
 				if (isNull _eastDefault && _present_east) then {_eastDefault = _tempWork select floor(random _total); _tempWork = _tempWork - [_eastDefault]};
 				if (isNull _westDefault && _present_west) then {_westDefault = _tempWork select floor(random _total); _tempWork = _tempWork - [_westDefault]};
 			};
-			
+
 			if (_present_res) then {_startG = _guerDefault};
 			if (_present_east && !_skip_e) then {_startE = _eastDefault};
 			if (_present_west && !_skip_w) then {_startW = _westDefault};
-			
+
 			["INITIALIZATION", "Init_Server.sqf : All sides were placed by force after that the attempts limit was reached."] Call WFBE_CO_FNC_LogContent;
 		};
 	};
@@ -273,13 +269,13 @@ emptyQueu = [];
 {
 	Private["_side"];
 	_side = _x select 1;
-	
+
 	//--- Only use those variable if the side logic is present in the editor.
 	if (_x select 0) then {
 		_pos = _x select 2;
 		_logik = (_side) Call WFBE_CO_FNC_GetSideLogic;
 		_sideID = (_side) Call WFBE_CO_FNC_GetSideID;
-		
+
 		//--- HQ init.
 		_hq = [missionNamespace getVariable Format["WFBE_%1MHQNAME", _side], _pos, _sideID, getDir _pos, true, false, true] Call WFBE_CO_FNC_CreateVehicle;
 		_hq setVariable ["WFBE_Taxi_Prohib", true];
@@ -287,10 +283,10 @@ emptyQueu = [];
 		_hq setVariable ["wfbe_trashable", false];
 		_hq setVariable ["wfbe_structure_type", "Headquarters"];
 		_hq addEventHandler ['killed', {_this Spawn WFBE_SE_FNC_OnHQKilled}];
-		
+
 		//--- HQ Friendly Fire handler.
 		if ((missionNamespace getVariable "WFBE_C_GAMEPLAY_HANDLE_FRIENDLYFIRE") > 0) then {_hq addEventHandler ['handleDamage',{[_this select 0,_this select 2,_this select 3] Call BuildingHandleDamages}]};
-		
+
 		//--- Get upgrade clearance for side.
 		_clearance = missionNamespace getVariable "WFBE_C_GAMEPLAY_UPGRADES_CLEARANCE";
 		_upgrades = false;
@@ -302,14 +298,14 @@ emptyQueu = [];
 				default {false};
 			};
 		};
-		
+
 		if !(_upgrades) then {
 			_upgrades = [];
 			for '_i' from 0 to count(missionNamespace getVariable Format["WFBE_C_UPGRADES_%1_LEVELS", _side])-1 do {[_upgrades, 0] Call WFBE_CO_FNC_ArrayPush};
 		} else {
 			_upgrades = missionNamespace getVariable Format["WFBE_C_UPGRADES_%1_LEVELS", _side];
 		};
-		
+
 		//--- Logic init.
 		_logik setVariable ["wfbe_commander", objNull, true];
 		_logik setVariable ["wfbe_hq", _hq, true];
@@ -325,13 +321,13 @@ emptyQueu = [];
 		_logik setVariable ["wfbe_upgrading", false, true];
 		_logik setVariable ["wfbe_votetime", missionNamespace getVariable "WFBE_C_GAMEPLAY_VOTE_TIME", true];
 		_logik setVariable ["wfbe_hqinuse",false];
-		
+
 		//todo improve.
 		WF_Logic setVariable [Format["%1UnitsCreated",_side],0,true];
 		WF_Logic setVariable [Format["%1Casualties",_side],0,true];
 		WF_Logic setVariable [Format["%1VehiclesCreated",_side],0,true];
 		WF_Logic setVariable [Format["%1VehiclesLost",_side],0,true];
-		
+
 		//--- Parameters specific.
 		if ((missionNamespace getVariable "WFBE_C_BASE_AREA") > 0) then {_logik setVariable ["wfbe_basearea", [], true]};
 		if ((missionNamespace getVariable "WFBE_C_ECONOMY_SUPPLY_SYSTEM") == 0 && (missionNamespace getVariable "WFBE_C_AI_COMMANDER_ENABLED") > 0) then {
@@ -347,12 +343,12 @@ emptyQueu = [];
 			_logik setVariable ["wfbe_workers", [], true];
 			_logik setVariable ["wfbe_structures_logic", []];
 		};
-		
+
 		//--- Structures limit (live).
 		_str = [];
 		for '_i' from 0 to count(missionNamespace getVariable Format["WFBE_%1STRUCTURES",_side])-2 do {_str set [_i, 0]};
 		_logik setVariable ["wfbe_structures_live", _str, true];
-		
+
 		//--- Radio: Initialize the announcers entities.
 		_radio_hq1 = (createGroup sideLogic) createUnit ["Logic",[0,0,0],[],0,"NONE"];
 		_radio_hq2 = (createGroup sideLogic) createUnit ["Logic",[0,0,0],[],0,"NONE"];
@@ -360,18 +356,18 @@ emptyQueu = [];
 		[_radio_hq2] joinSilent (createGroup _side);
 		_logik setVariable ["wfbe_radio_hq", _radio_hq1, true];
 		_logik setVariable ["wfbe_radio_hq_rec", _radio_hq2];
-		
+
 		//--- Radio: Pick a random announcer.
 		_announcers = missionNamespace getVariable Format ["WFBE_%1_RadioAnnouncers", _side];
 		_radio_hq_id = (_announcers) select floor(random (count _announcers));
-		
+
 		//--- Radio: Apply an identity.
 		_radio_hq1 setIdentity _radio_hq_id;
 		_radio_hq1 setRank 'COLONEL';
 		_radio_hq1 setGroupId ["HQ"];
 		_radio_hq1 kbAddTopic [_radio_hq_id, "Client\kb\hq.bikb","Client\kb\hq.fsm", {call compile preprocessFileLineNumbers "Client\kb\hq.sqf"}];
 		_logik setVariable ["wfbe_radio_hq_id", _radio_hq_id, true];
-		
+
 		//--- Starting vehicles.
 		{
 			_vehicle = [_x, getPos _hq, _sideID, 0, false] Call WFBE_CO_FNC_CreateVehicle;
@@ -381,7 +377,7 @@ emptyQueu = [];
 			emptyQueu = emptyQueu + [_vehicle];
 			_vehicle spawn HandleEmptyVehicle;
 		} forEach (missionNamespace getVariable Format ['WFBE_%1STARTINGVEHICLES', _side]);
-		
+
 		//--- Groups init.
 		_teams = [];
 		{
@@ -390,7 +386,7 @@ emptyQueu = [];
 					Private ["_group"];
 					_group = group _x;
 					[_teams, _group] Call WFBE_CO_FNC_ArrayPush;
-					
+
 					if (isNil {_group getVariable "wfbe_funds"}) then {_group setVariable ["wfbe_funds", missionNamespace getVariable Format ["WFBE_C_ECONOMY_FUNDS_START_%1", _side], true]};
 					_group setVariable ["wfbe_side", _side];
 					_group setVariable ["wfbe_persistent", true];
@@ -401,7 +397,7 @@ emptyQueu = [];
 					[_group, -1] Call SetTeamType;
 					[_group, "towns"] Call SetTeamMoveMode;
 					[_group, [0,0,0]] Call SetTeamMovePos;
-					
+
 					if ((missionNamespace getVariable "WFBE_C_AI_TEAMS_ENABLED") > 0) then {
 						if (!isPlayer _x && alive _x) then {
 							_x setPos ([getPos _pos, 20, 30] Call GetRandomPosition);
@@ -415,16 +411,16 @@ emptyQueu = [];
 								};
 							};
 						};
-					
+
 						if !(WF_A2_Vanilla) then {(_group) Call Compile preprocessFile 'Server\AI\AI_AddMultiplayerRespawnEH.sqf'};
 						[_group] ExecFSM "Server\FSM\aiteam.fsm";
 					};
 					["INITIALIZATION", Format["Init_Server.sqf: [%1] Team [%2] was initialized.", _side, _group]] Call WFBE_CO_FNC_LogContent;
 				};
-				
+
 			};
 		} forEach (synchronizedObjects _logik);
-		
+
 		_logik setVariable ["wfbe_teams", _teams, true];
 		_logik setVariable ["wfbe_teams_count", count _teams];
 	};
@@ -451,7 +447,7 @@ WF_Logic setVariable ["emptyVehicles",[],true];
 	};
 	[] ExecFSM "Server\FSM\updateresources.fsm";
 	["INITIALIZATION", "Init_Server.sqf: Resources FSM is initialized."] Call WFBE_CO_FNC_LogContent;
-	
+
 	if ((missionNamespace getVariable "WFBE_C_TOWNS_CONQUEST_MODE") > 0) then {[] ExecFSM "Server\FSM\conquest.fsm"};
 };
 
@@ -478,7 +474,7 @@ if (_allies > 0 && (WF_A2_Vanilla || WF_A2_CombinedOps)) then {
 if ((missionNamespace getVariable "WFBE_C_MODULE_WFBE_MISSIONS") > 0) then {
 	//--- Initialize the missions.
 	Call Compile preprocessFileLineNumbers "Server\Module\Missions\Init_Missions.sqf";
-	
+
 	ExecFSM 'Server\FSM\module_missions.fsm';
 
 	["INITIALIZATION", "Init_Server.sqf: Secondary Missions module is running."] Call WFBE_CO_FNC_LogContent;
