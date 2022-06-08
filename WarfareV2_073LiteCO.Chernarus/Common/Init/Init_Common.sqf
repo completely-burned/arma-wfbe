@@ -342,6 +342,9 @@ if (isServer) then {
 //--- Airports Init.
 ExecVM "Common\Init\Init_Airports.sqf";
 
+//--- diag_fps.
+ExecVM "Common\Common_Update_fps.sqf";
+
 ["INITIALIZATION", "Init_Common.sqf: Config Files are loaded."] Call WFBE_CO_FNC_LogContent;
 
 //--- Boundaries, use setPos to find the perfect spot on other islands and worldName to determine the island name (editor: diag_log worldName; player setPos [0,5120,0]; ).
