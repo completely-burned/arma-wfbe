@@ -127,6 +127,8 @@ WFBE_CO_FNC_WaypointSimple = Compile preprocessFileLineNumbers "Common\Functions
 WFBE_CO_FNC_WaypointsAdd = Compile preprocessFileLineNumbers "Common\Functions\Common_WaypointsAdd.sqf";
 WFBE_CO_FNC_WaypointsRemove = Compile preprocessFileLineNumbers "Common\Functions\Common_WaypointsRemove.sqf";
 
+gosa_FNC_GetFPS = Compile preprocessFileLineNumbers "Common\Functions\Common_GetFPS.sqf";
+
 ["INITIALIZATION", "Init_Common.sqf: Functions are initialized."] Call WFBE_CO_FNC_LogContent;
 
 varQueu = random(10)+random(100)+random(1000);
