@@ -230,7 +230,7 @@ WFBE_SE_FNC_GetDelegators = {
 				_new = 0;
 			};
 
-			if ((_must > 0) && {((_now + _new) <= _cl_limit_grpoups)}) then {
+			if ((_must > 0) && {_hc or ((_now + _new) <= _cl_limit_grpoups)}) then {
 				//if ((_get select 1) < _amount) then { //--- Progressive checks to prevent client overloading.
 					_delegators set [count _delegators, _obj];
 					["INFORMATION", Format["gosa_SE_FNC_GetDelegators: delegators+[%1]", _unit]] Call WFBE_CO_FNC_LogContent;
