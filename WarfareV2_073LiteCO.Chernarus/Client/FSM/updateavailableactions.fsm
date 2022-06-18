@@ -119,7 +119,7 @@ class FSM
        "	_ai_delegation_fps = _ai_delegation_fps + diag_fps;" \n
        "	_ai_delegation_fps_count = _ai_delegation_fps_count + 1;" \n
        "	if (time - _ai_delegation_lastsent > (missionNamespace getVariable ""WFBE_C_AI_DELEGATION_FPS_INTERVAL"")) then { //--- Send the FPS Avg to the server." \n
-       "		[""RequestSpecial"", [""update-clientfps"", getPlayerUID(player), round(_ai_delegation_fps / _ai_delegation_fps_count)]] Call WFBE_CO_FNC_SendToServer;" \n
+       "		//[""RequestSpecial"", [""update-clientfps"", getPlayerUID(player), round(_ai_delegation_fps / _ai_delegation_fps_count)]] Call WFBE_CO_FNC_SendToServer;" \n
        "		_ai_delegation_lastsent = time;" \n
        "		_ai_delegation_fps_count = 0;" \n
        "		_ai_delegation_fps = 0;" \n
